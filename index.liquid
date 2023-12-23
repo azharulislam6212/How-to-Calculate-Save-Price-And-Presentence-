@@ -1,4 +1,9 @@
-       {%- if product.compare_at_price > product.price -%}
+
+  {%- liquid
+            assign variant = variant | default: product.selected_or_first_available_variant
+          -%}
+
+{%- if product.compare_at_price > product.price -%}
             {%- if settings.discount_mode == 'percentage' -%}
               {%- assign savings = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round | append: '%' -%}
             {%- else -%}
